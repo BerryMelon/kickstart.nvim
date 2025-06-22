@@ -890,6 +890,7 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.files').setup {
         vim.keymap.set('n', '-', '<CMD>lua MiniFiles.open()<CR>'),
+        vim.keymap.set('n', '_', '<CMD>lua MiniFiles.open(nil, false)<CR>'),
       }
     end,
   },
