@@ -886,10 +886,15 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
-      -- ... and there is more!
+      local toggleMiniFiles = function()
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+        MiniFiles.open(path)
+        MiniFiles.reveal_cwd()
+      end -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.files').setup {
-        vim.keymap.set('n', '-', '<CMD>lua MiniFiles.open()<CR>'),
+        vim.keymap.set('n', '-', toggleMiniFiles),
         vim.keymap.set('n', '_', '<CMD>lua MiniFiles.open(nil, false)<CR>'),
       }
     end,
