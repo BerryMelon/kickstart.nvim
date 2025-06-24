@@ -173,6 +173,18 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- [[ Load local lua files under /local
+local config_dir = vim.fn.stdpath 'config' .. '/lua/local'
+
+for _, file in ipairs(vim.fn.readdir(config_dir)) do
+  if file:sub(1, 1) ~= '.' and file:sub(-4) == '.lua' then
+    local ok, err = pcall(require, 'local.' .. file:sub(1, -5))
+    if not ok then
+      vim.notify('Error loading ' .. file .. ': ' .. err, vim.log.levels.ERROR)
+    end
+  end
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -946,7 +958,7 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' },
   { import = 'custom.plugins.colorschemes' },
-  --
+
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
