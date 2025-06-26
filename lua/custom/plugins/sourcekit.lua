@@ -4,7 +4,7 @@ return {
     opts = {
       servers = {
         sourcekit = {
-          cmd = { '/usr/bin/sourcekit-lsp' },
+          cmd = { '/Applications/Xcode_16.3_16E140.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp' },
         },
       },
     },
